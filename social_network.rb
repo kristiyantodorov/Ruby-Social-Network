@@ -1,6 +1,6 @@
 class Panda
   attr_reader :name, :email, :gender
-  
+
   def initialize(name, email, gender)
     @name = name
     @email = email
@@ -10,4 +10,7 @@ class Panda
   def to_s
     puts "#{@name}, #{@email}, #{@gender}"
   end
+end
+
+class SocialNetwork
 end
