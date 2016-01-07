@@ -1,6 +1,6 @@
 class Panda
   attr_reader :name, :email, :gender
-  
+
   def initialize(name, email, gender)
     @name = name
     @email = email
@@ -27,5 +27,16 @@ class Panda
 
   def to_s
     "#{@name}, #{@email}, #{@gender}"
+  end
+end
+
+class SocialNetwork
+  def initialize
+    @network = {}
+  end
+
+  def add_panda(panda)
+    raise "Invalid parameters passed." if @network.has_key?(panda)
+    unless @network.has_key?(panda) @network[panda] = []
   end
 end
