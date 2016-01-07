@@ -7,8 +7,26 @@ class Panda
     @gender = gender
   end
 
+  def male?
+    @gender == 'male'
+  end
+
+  def female?
+    @gender == 'female'
+  end
+
+  def ==(other_panda)
+    @name == other_panda.name and
+    @email == other_panda.email and
+    @gender == other_panda.gender
+  end
+
+  def hash
+    to_s
+  end
+
   def to_s
-    puts "#{@name}, #{@email}, #{@gender}"
+    "#{@name}, #{@email}, #{@gender}"
   end
 end
 
