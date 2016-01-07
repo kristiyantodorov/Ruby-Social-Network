@@ -5,6 +5,7 @@ class Panda
     @name = name
     @email = email
     @gender = gender
+    @friends = []
   end
 
   def male?
@@ -21,7 +22,11 @@ class Panda
     @gender == other_panda.gender
   end
 
+  def hash
+    to_s
+  end
+
   def to_s
-    puts "#{@name}, #{@email}, #{@gender}"
+    "#{@name}, #{@email}, #{@gender}"
   end
 end
