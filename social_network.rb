@@ -29,3 +29,13 @@ class Panda
     "#{@name}, #{@email}, #{@gender}"
   end
 end
+
+class SocialNetwork
+  def initialize
+    @network = {}
+  end
+
+  def has_panda(panda)
+    @network.has_key?(panda.hash)
+  end
+end
