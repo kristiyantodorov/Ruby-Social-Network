@@ -22,7 +22,7 @@ class Panda
   end
 
   def hash
-    to_s
+    @name.hash + @email.hash + @gender.hash
   end
 
   def to_s
@@ -40,7 +40,7 @@ class SocialNetwork
   end
   
   def add_panda(panda)
-    raise "Invalid parameters passed." if @network.has_key?(panda)
-    unless @network.has_key?(panda) @network[panda] = []
+    raise "Invalid parameters passed." if @network.has_key?(panda.hash)
+    @network[panda.hash] = []
   end
 end
