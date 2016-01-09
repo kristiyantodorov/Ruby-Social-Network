@@ -21,8 +21,10 @@ class Panda
     @gender == other_panda.gender
   end
 
+  alias eql? ==
+
   def hash
-    @name.hash + @email.hash + @gender.hash
+    to_s.hash
   end
 
   def to_s
@@ -30,17 +32,17 @@ class Panda
   end
 end
 
-class SocialNetwork
+class PandaSocialNetwork
   def initialize
     @network = {}
   end
 
   def has_panda(panda)
-    @network.has_key?(panda.hash)
+    @network.has_key?(panda)
   end
-  
+
   def add_panda(panda)
-    raise "Invalid parameters passed." if @network.has_key?(panda.hash)
-    @network[panda.hash] = []
+    raise "Invalid parameters passed." if @network.has_key?(panda)
+    @network[panda] = []
   end
 end
