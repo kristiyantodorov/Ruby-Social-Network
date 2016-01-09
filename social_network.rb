@@ -45,4 +45,16 @@ class PandaSocialNetwork
     raise "Invalid parameters passed." if @network.has_key?(panda)
     @network[panda] = []
   end
+
+  def are_friends(panda1, panda2)
+    return false unless has_panda(panda1)
+    @network[panda1].include? panda2
+  end
+
+  def friends_of(panda)
+    return false unless has_panda(panda)
+    result = []
+    @network[panda].each { |friend| result << friend }
+    friend
+  end
 end
