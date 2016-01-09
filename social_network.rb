@@ -46,6 +46,14 @@ class PandaSocialNetwork
     @network[panda] = []
   end
 
+  def make_friends(panda1, panda2)
+    add_panda(panda1) unless has_panda(panda1)
+    add_panda(panda2) unless has_panda(panda2)
+    raise 'Pandas already frieds!' if @network[panda1].include? panda2
+    @network[panda1] << panda2
+    @network[panda2] << panda1
+  end
+
   def are_friends(panda1, panda2)
     return false unless has_panda(panda1)
     @network[panda1].include? panda2
