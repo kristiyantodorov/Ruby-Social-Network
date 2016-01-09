@@ -69,14 +69,14 @@ class PandaSocialNetwork
   def how_many_gender_in_network(level, panda, gender)
     return 0 unless has_panda(panda)
     count = 0
-    queue = {}
-    queue[panda] = 0
+    queue = []
+    queue << [panda, 0]
     visited = [panda]
-    while !queue.empty? and queue.values.first < level
+    while !queue.empty? and queue.first.last < level
       current_panda = queue.shift
       friends_of(current_panda.first).each do |friend|
         if !(visited.include? friend)
-        queue[friend] = current_panda.last + 1
+        queue << [friend, current_panda.last + 1]
         visited << friend
         end
       end
