@@ -73,6 +73,38 @@ class PandaSocialNetwork
     end
     count
   end
+
+  def are_friends(panda1, panda2)
+    return false unless has_panda(panda1)
+    @network[panda1].include? panda2
+  end
+
+  def friends_of(panda)
+    return false unless has_panda(panda)
+    result = []
+    @network[panda].each { |friend| result << friend }
+    result
+  end
+
+  def how_many_gender_in_network(level, panda, gender)
+    return 0 unless has_panda(panda)
+    count = 0
+    queue = []
+    queue << [panda, 0]
+    visited = [panda]
+    while !queue.empty? and queue.first.last < level
+      current_panda = queue.shift
+      friends_of(current_panda.first).each do |friend|
+        if !(visited.include? friend)
+        queue << [friend, current_panda.last + 1]
+        visited << friend
+        end
+      end
+    end
+    result = 0
+    visited.each { |elem| result += 1 if elem.gender == gender}
+    result
+  end
 end
 
 panda1 = Panda.new '1', '1', '1'
@@ -84,7 +116,6 @@ panda6 = Panda.new '6', '6', '6'
 panda7 = Panda.new '7', '7', '7'
 
 net = PandaSocialNetwork.new
-
 
 net.make_friends(panda1, panda2)
 net.make_friends(panda1, panda3)
