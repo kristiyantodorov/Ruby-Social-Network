@@ -60,15 +60,17 @@ class PandaSocialNetwork
     queue[0] = [panda1]
     visited = []
     until queue.empty?
-      current_level = queue[count]
-      current_level -= visited
+      current_level = []
+      queue[count].each { |v| current_level << v }
+      queue.shift
       p current_level
+
       current_level.each do |v|
         return count if v == panda2
-        queue[count + 1] = []
-        queue[count + 1] += @network[v]
-        visited += current_level
+        visited << v
+        queue[count + 1] = @network[v]
       end
+
       count += 1
     end
     count
@@ -106,23 +108,3 @@ class PandaSocialNetwork
     result
   end
 end
-
-panda1 = Panda.new '1', '1', '1'
-panda2 = Panda.new '2', '2', '2'
-panda3 = Panda.new '3', '3', '3'
-panda4 = Panda.new '4', '4', '4'
-panda5 = Panda.new '5', '5', '5'
-panda6 = Panda.new '6', '6', '6'
-panda7 = Panda.new '7', '7', '7'
-
-net = PandaSocialNetwork.new
-
-net.make_friends(panda1, panda2)
-net.make_friends(panda1, panda3)
-net.make_friends(panda2, panda4)
-net.make_friends(panda2, panda5)
-net.make_friends(panda3, panda6)
-net.make_friends(panda3, panda7)
-net.make_friends(panda5, panda7)
-
-puts net.connection_level(panda1, panda5)
