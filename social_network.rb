@@ -55,6 +55,8 @@ class PandaSocialNetwork
   end
 
   def connection_level(panda1, panda2)
+    return false unless @network.has_key panda1 and @network.has_key panda2
+    
     count = 0
     queue = {}
     queue[0] = [panda1]
@@ -73,7 +75,8 @@ class PandaSocialNetwork
 
       count += 1
     end
-    count
+
+    return -1
   end
 
   def are_friends(panda1, panda2)
