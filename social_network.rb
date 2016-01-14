@@ -60,7 +60,7 @@ class PandaSocialNetwork
 
   def connection_level(panda1, panda2)
     return false unless @network.has_key panda1 and @network.has_key panda2
-    
+
     count = 0
     queue = {}
     queue[0] = [panda1]
@@ -97,7 +97,6 @@ class PandaSocialNetwork
 
   def how_many_gender_in_network(level, panda, gender)
     return 0 unless has_panda(panda)
-    count = 0
     queue = []
     queue << [panda, 0]
     visited = [panda]
@@ -114,6 +113,13 @@ class PandaSocialNetwork
     visited.each { |elem| result += 1 if elem.gender == gender}
     result
   end
+
+  def save(file_name)
+    File.open(file_name, 'w') { |file| file.write(Marshal.dump self) }
+  end
+
+  def self.load(file_name)
+    Marshal.load(File.read(file_name))
 
   def load_normally(file_name)
     File.open(file_name, 'r') do |file|
@@ -134,7 +140,7 @@ class PandaSocialNetwork
   def self.save_normally(file_name)
     File.open(file_name + '.txt', 'w') do |file|
       file.write(network)
-    end 
+    end
   end
 
   def self.save_to_json(file_name)
