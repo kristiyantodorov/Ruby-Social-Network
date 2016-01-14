@@ -1,3 +1,5 @@
+require 'json'
+
 class Panda
   attr_reader :name, :email, :gender
 
@@ -33,6 +35,8 @@ class Panda
 end
 
 class PandaSocialNetwork
+  attr_reader :network
+
   def initialize
     @network = {}
   end
@@ -109,5 +113,37 @@ class PandaSocialNetwork
     result = 0
     visited.each { |elem| result += 1 if elem.gender == gender}
     result
+  end
+
+  def load_normally(file_name)
+    File.open(file_name, 'r') do |file|
+      file.each_line do |line|
+        @network = line
+      end
+    end
+  end
+
+  def load_from_json(file_name)
+    File.open(file_name + '.json', 'r') do |file|
+      file.each_line do |line|
+        @network = JSON.parse(line)
+      end
+    end
+  end
+
+  def self.save_normally(file_name)
+    File.open(file_name + '.txt', 'w') do |file|
+      file.write(network)
+    end 
+  end
+
+  def self.save_to_json(file_name)
+    File.open(file_name + '.json', 'w') do |file|
+      file.write(network.to_json)
+    end
+  end
+
+  def self.save_to_xml(file_name, network)
+
   end
 end
