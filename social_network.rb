@@ -120,7 +120,8 @@ class PandaSocialNetwork
 
   def self.load(file_name)
     Marshal.load(File.read(file_name))
-
+  end
+  
   def load_normally(file_name)
     File.open(file_name, 'r') do |file|
       file.each_line do |line|
